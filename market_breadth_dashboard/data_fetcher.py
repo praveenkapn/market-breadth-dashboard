@@ -16,10 +16,20 @@ def get_index_constituents(index_name):
     url = INDEX_URLS[index_name]
 
     headers = {
-        "User-Agent": "Mozilla/5.0"
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/137.0.0.0 Safari/537.36"
+        ),
+        "Accept": "text/csv,text/plain,*/*",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Referer": "https://www.niftyindices.com/",
+        "Origin": "https://www.niftyindices.com"
     }
 
-    response = requests.get(
+    session = requests.Session()
+
+    response = session.get(
         url,
         headers=headers,
         timeout=60
@@ -30,8 +40,6 @@ def get_index_constituents(index_name):
     df = pd.read_csv(
         StringIO(response.text)
     )
-
-    print(df.columns)
 
     symbols = df["Symbol"].dropna().tolist()
 
