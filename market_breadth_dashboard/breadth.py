@@ -2,14 +2,14 @@ import yfinance as yf
 import pandas as pd
 import streamlit as st
 
-@st.cache_data(ttl=900)
+@st.cache_data(ttl=1800)
 def calculate_breadth(symbols):
 
     try:
 
         data = yf.download(
             symbols,
-            period="5y",
+            period="1y",
             auto_adjust=False,
             progress=False,
             threads=True
