@@ -1,25 +1,12 @@
 import pandas as pd
-import requests
-from io import StringIO
 import streamlit as st
+
 
 @st.cache_data(ttl=86400)
 def get_sector_stocks():
 
-    url = "https://www.niftyindices.com/IndexConstituent/ind_nifty500list.csv"
-
-    headers = {
-        "User-Agent": "Mozilla/5.0"
-    }
-
-    response = requests.get(
-        url,
-        headers=headers,
-        timeout=60
-    )
-
     df = pd.read_csv(
-        StringIO(response.text)
+        "data/nifty500.csv"
     )
 
     sector_map = {}
