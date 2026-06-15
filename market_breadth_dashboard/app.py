@@ -67,7 +67,9 @@ if page == "Index Breadth":
                 "EMA50",
                 "EMA100",
                 "EMA200"
-            ]
+            ],
+            vmin=0,
+            vmax=100
         )
         .format({
             "EMA20": "{:.0f}%",
